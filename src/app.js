@@ -2,17 +2,20 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+
+const peliculaRoutes = require('./routes/peliculashandler');
+const Pelicula = require('./models/peliculamodel');
+
 const app = express();
 app.use(cors());
 app.use(express.json());
-<<<<<<< Updated upstream
-const Pelicula = require('./models/peliculamodel');
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Conectado exitosamente a MongoDB Atlas'))
     .catch((error) => console.error('Error al conectar a MongoDB:', error));
 
-// Ruta de prueba para ver si los datos fluyen
+app.use('/api/peliculas', peliculaRoutes);
+
 app.get('/probar-datos', async (req, res) => {
     try {
         const unaPelicula = await Pelicula.findOne();
@@ -25,13 +28,5 @@ app.get('/probar-datos', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 5000;
-=======
-app.use('/api/peliculas', peliculaRoutes);
-
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('Conectado exitosamente a MongoDB Atlas'))
-    .catch((error) => console.error('Error al conectar a MongoDB:', error));       
 const PORT = process.env.PORT || 5005;
->>>>>>> Stashed changes
 app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
