@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-const peliculaRoutes = require('./routes/peliculashandler');
+const peliculaRoutes = require('./routes/pelicularoute');
 const Pelicula = require('./models/peliculamodel');
 
 const app = express();
