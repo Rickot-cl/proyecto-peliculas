@@ -6,7 +6,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 const Pelicula = require('./models/peliculamodel');
-
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+app.use('/admin', adminRoutes);
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Conectado exitosamente a MongoDB Atlas'))
     .catch((error) => console.error('Error al conectar a MongoDB:', error));
